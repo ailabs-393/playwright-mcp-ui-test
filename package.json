@@ -1,26 +1,46 @@
 {
-  "name": "playwright-mcp-ui-test",
+  "name": "playwright-ui-mcp",
   "version": "1.0.0",
-  "description": "MCP server for headed browser UI capture and analysis using Playwright",
+  "description": "Lightweight MCP server for headed browser UI capture and analysis using Playwright. Supports screenshots, video recording, and browser automation for Claude.",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "bin": {
-    "playwright-mcp-ui-test": "./dist/index.js",
-    "playwright-mcp-ui-test-install": "./dist/install.js"
+    "playwright-ui-mcp": "./dist/index.js",
+    "playwright-ui-mcp-install": "./dist/install.js"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "start": "node dist/index.js",
-    "dev": "ts-node src/index.ts",
-    "install-browsers": "npx playwright install chromium"
+    "postinstall": "npx playwright install chromium || echo 'Note: Run npx playwright install chromium to install the browser'"
   },
   "keywords": [
     "mcp",
+    "model-context-protocol",
     "playwright",
     "browser-automation",
     "ui-testing",
-    "claude"
+    "claude",
+    "anthropic",
+    "screenshot",
+    "headed-browser",
+    "web-automation"
   ],
+  "author": "ailabs-393",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ailabs-393/playwright-mcp-ui-test.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ailabs-393/playwright-mcp-ui-test/issues"
+  },
+  "homepage": "https://github.com/ailabs-393/playwright-mcp-ui-test#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
     "playwright": "^1.49.0"

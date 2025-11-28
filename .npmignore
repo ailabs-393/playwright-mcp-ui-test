@@ -1,0 +1,26 @@
+# Source files (dist is published)
+src/
+
+# Test files
+test/
+test-screenshots/
+test-video-output/
+*.test.ts
+*.spec.ts
+
+# Config files
+tsconfig.json
+.mcp.json
+
+# Dev files
+.git/
+.gitignore
+.DS_Store
+*.log
+node_modules/
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo

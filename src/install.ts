@@ -13,7 +13,7 @@ interface McpConfig {
   };
 }
 
-const MCP_SERVER_NAME = 'playwright-mcp-ui-test';
+const MCP_SERVER_NAME = 'playwright-ui';
 
 async function install() {
   const cwd = process.cwd();
@@ -42,13 +42,9 @@ async function install() {
     console.log('Creating new .mcp.json...\n');
   }
 
-  // Get the path to the server - __dirname is 'dist' folder when compiled
-  const serverPath = path.join(__dirname, 'index.js');
-
-  // Always use npx for portability - this ensures it works regardless of
-  // where the package is installed (global, local, npx cache, etc.)
+  // Always use npx for portability - works regardless of install location
   const command = 'npx';
-  const args = ['-y', 'playwright-mcp-ui-test'];
+  const args = ['-y', 'playwright-ui-mcp'];
 
   // Add server config
   config.mcpServers![MCP_SERVER_NAME] = {

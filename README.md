@@ -1,87 +1,118 @@
-# Playwright MCP UI Test Server
+# playwright-ui-mcp
 
-An MCP (Model Context Protocol) server that enables headed browser UI capture and analysis using Playwright. This tool allows Claude (or other MCP clients) to interact with web pages, take screenshots, and perform UI automation tasks in a visible browser window.
+A lightweight MCP (Model Context Protocol) server for headed browser UI capture and analysis using Playwright. Designed for use with Claude to enable visual UI inspection, screenshots, and browser automation.
 
 ## Features
 
-*   **Headed Browser**: Launches a visible Chromium browser for real-time observation.
-*   **UI Interaction**: Click, type, navigate, and manage pages/tabs.
-*   **Visual Analysis**: Capture screenshots (full page or element-specific) for analysis.
-*   **Content Retrieval**: Extract HTML and text content from pages.
-*   **Element Discovery**: Identify visible interactive elements with generated selectors.
-*   **Session Management**: Robust handling of browser sessions and temporary file cleanup.
-*   **Video Recording**: Optional video recording of sessions for debugging.
+- **Headed browser** - Always visible, not headless, for real UI analysis
+- **Lightweight by default** - No video recording unless explicitly enabled
+- **Screenshot capture** - Returns base64 images for Claude to analyze
+- **Video recording** - Optional, enable only when needed
+- **Auto cleanup** - All screenshots/videos deleted when browser closes
+- **Interactive elements** - Get clickable elements with selectors
 
 ## Installation
 
-### Prerequisites
-*   Node.js >= 18.0.0
-*   npm or yarn
+### Quick Install (Project Scope)
 
-### Setup
-To install the server and configure it for your project:
+Navigate to your project and run:
 
-1.  Install dependencies:
-    ```bash
-    npm install
-    ```
+```bash
+npx playwright-ui-mcp-install
+```
 
-2.  Build the project:
-    ```bash
-    npm run build
-    ```
+This creates a `.mcp.json` in your project directory (not global config).
 
-3.  Install the necessary Playwright browsers:
-    ```bash
-    npm run install-browsers
-    ```
+### Manual Configuration
 
-4.  Configure the MCP server:
-    You can use the included install script to add the server to your local `.mcp.json` configuration:
-    ```bash
-    npm run start -- install
-    ```
-    
-    Alternatively, you can manually run the built server using `node dist/index.js`.
+Create `.mcp.json` in your project root:
+
+```json
+{
+  "mcpServers": {
+    "playwright-ui": {
+      "command": "npx",
+      "args": ["-y", "playwright-ui-mcp"]
+    }
+  }
+}
+```
+
+Then restart Claude Code or run `/mcp` to load the server.
 
 ## Available Tools
 
-The server exposes the following tools via MCP:
+| Tool | Description |
+|------|-------------|
+| `browser_launch` | Launch headed browser. Options: `width`, `height`, `slowMo`, `recordVideo` |
+| `browser_new_page` | Create a new tab |
+| `browser_navigate` | Navigate to URL |
+| `browser_screenshot` | Capture screenshot (returns base64 image for analysis) |
+| `browser_get_visible_elements` | Get interactive elements with selectors |
+| `browser_get_content` | Get page HTML and text |
+| `browser_click` | Click an element |
+| `browser_type` | Type into input field |
+| `browser_wait_for` | Wait for element to appear |
+| `browser_evaluate` | Run JavaScript in page |
+| `browser_close_page` | Close a specific tab |
+| `browser_close` | Close browser and cleanup all captures |
+| `browser_status` | Get session info |
 
-| Tool Name | Description |
-|-----------|-------------|
-| `browser_launch` | Launch a headed browser. Options for viewport size, slowMo, and video recording. |
-| `browser_new_page` | Create a new page/tab in the browser. |
-| `browser_navigate` | Navigate a specific page to a URL. |
-| `browser_screenshot` | Take a screenshot of a page or element. Returns base64 image data. |
-| `browser_get_visible_elements` | Get a list of visible interactive elements with selectors. |
-| `browser_get_content` | Get the HTML and text content of a page. |
-| `browser_click` | Click on an element using a CSS selector. |
-| `browser_type` | Type text into an input field. |
-| `browser_wait_for` | Wait for a specific element to appear. |
-| `browser_evaluate` | Execute custom JavaScript in the page context. |
-| `browser_close_page` | Close a specific page/tab. |
-| `browser_close` | Close the browser and clean up all resources. |
-| `browser_status` | Get the current status of the browser session. |
+## Usage Examples
 
-## Development
+### Basic UI Inspection
 
-### Building
-```bash
-npm run build
+Ask Claude:
+> "Open a browser, go to https://example.com, and describe what you see"
+
+Claude will:
+1. Launch browser
+2. Navigate to the URL
+3. Take a screenshot
+4. Analyze the UI visually
+5. Close browser (auto-cleanup)
+
+### Form Interaction
+
+> "Go to the login page, fill in username 'test@example.com' and password 'secret', then click submit"
+
+### With Video Recording (Heavy Mode)
+
+> "Record a video while you navigate through the checkout flow"
+
+Claude will use `recordVideo: true` when launching.
+
+## Lightweight vs Heavy Mode
+
+| Mode | Video | slowMo | Use Case |
+|------|-------|--------|----------|
+| **Default (Light)** | Off | None | Quick UI checks |
+| **Heavy** | On | 100-200ms | Debugging, demos |
+
+```javascript
+// Lightweight (default)
+browser_launch()
+
+// Heavy mode for debugging
+browser_launch({ recordVideo: true, slowMo: 150 })
 ```
 
-### Running Locally
-To run the server directly (useful for testing via stdio):
+## Cleanup
+
+All temporary files (screenshots, videos) are **automatically deleted** when `browser_close` is called. No manual cleanup required.
+
+## Uninstall
+
+Remove from project:
+
 ```bash
-npm start
+npx playwright-ui-mcp-install uninstall
 ```
 
-### Development Mode
-To run with `ts-node` for development:
-```bash
-npm run dev
-```
+## Requirements
+
+- Node.js >= 18.0.0
+- Chromium browser (auto-installed via Playwright on first run)
 
 ## License
 
