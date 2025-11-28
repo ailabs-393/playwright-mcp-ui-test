@@ -13,15 +13,21 @@ A lightweight MCP (Model Context Protocol) server for headed browser UI capture 
 
 ## Installation
 
-### Quick Install (Project Scope)
+### Automatic Install (Recommended)
 
-Navigate to your project and run:
+Install as a dependency in your project. The configuration (`.mcp.json`) is created automatically.
+
+```bash
+npm install playwright-ui-mcp
+```
+
+### Quick Setup (Without Installing)
+
+If you just want to configure the current directory without adding a dependency:
 
 ```bash
 npx playwright-ui-mcp-install
 ```
-
-This creates a `.mcp.json` in your project directory (not global config).
 
 ### Manual Configuration
 

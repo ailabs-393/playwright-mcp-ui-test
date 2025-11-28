@@ -17,7 +17,7 @@
     "build": "tsc",
     "prepublishOnly": "npm run build",
     "start": "node dist/index.js",
-    "postinstall": "npx playwright install chromium || echo 'Note: Run npx playwright install chromium to install the browser'"
+    "postinstall": "node dist/install.js && npx playwright install chromium || echo 'Note: Run npx playwright install chromium to install the browser'"
   },
   "keywords": [
     "mcp",

@@ -38,7 +38,9 @@ const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
 const MCP_SERVER_NAME = 'playwright-ui';
 async function install() {
-    const cwd = process.cwd();
+    // When installed as a dependency, INIT_CWD points to the user's project root
+    // When run directly (e.g. npx), process.cwd() is correct
+    const cwd = process.env.INIT_CWD || process.cwd();
     const mcpConfigPath = path.join(cwd, '.mcp.json');
     console.log('🎭 Playwright UI MCP Installer');
     console.log('================================\n');
@@ -79,13 +81,17 @@ async function install() {
     console.log('  - browser_new_page    Create new tab');
     console.log('  - browser_navigate    Navigate to URL');
     console.log('  - browser_screenshot  Capture screenshot for analysis');
+    console.log('  - browser_get_visible_elements Get visible elements');
+    console.log('  - browser_get_content Get page content');
     console.log('  - browser_click       Click element');
     console.log('  - browser_type        Type into input');
     console.log('  - browser_close       Close browser & cleanup captures\n');
     console.log('Restart Claude Code or run /mcp to load the server.\n');
 }
 async function uninstall() {
-    const cwd = process.cwd();
+    // When installed as a dependency, INIT_CWD points to the user's project root
+    // When run directly (e.g. npx), process.cwd() is correct
+    const cwd = process.env.INIT_CWD || process.cwd();
     const mcpConfigPath = path.join(cwd, '.mcp.json');
     console.log('🎭 Playwright UI MCP Uninstaller');
     console.log('=================================\n');
