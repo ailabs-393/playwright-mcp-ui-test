@@ -1,12 +1,12 @@
 # playwright-ui-mcp
-   <div align = "center">        
+<div align = "center">        
       
-  ![npm version](https://img.shields.io/npm/v/playwright-ui-mcp.svg)
-  ![downloads](https://img.shields.io/npm/dt/playwright-ui-mcp.svg)
-  ![license](https://img.shields.io/npm/l/playwright-ui-mcp.svg)                                                                
-  [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-green)](https://nodejs.org)
+![npm version](https://img.shields.io/npm/v/playwright-ui-mcp.svg)
+![downloads](https://img.shields.io/npm/dt/playwright-ui-mcp.svg)
+![license](https://img.shields.io/npm/l/playwright-ui-mcp.svg)                                                                
+[![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-green)](https://nodejs.org)
   
-  </div>
+</div>
   
 A lightweight MCP (Model Context Protocol) server for headed browser UI capture and analysis using Playwright. Designed for use with Claude to enable visual UI inspection, screenshots, and browser automation.
 
