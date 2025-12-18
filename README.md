@@ -1,10 +1,10 @@
 # playwright-ui-mcp
    <div align = "center">        
       
-  ![npm version](https://img.shields.io/npm/v/playwright-ui-mcp.svg)] 
-  ![downloads](https://img.shields.io/npm/dm/playwright-ui-mcp.svg)]
-  ![license](https://img.shields.io/npm/l/playwright-ui-mcp.svg)]                                                                 
-  ![Node.js](https://img.shields.io/node/v/playwright-ui-mcp.svg)] 
+  ![npm version](https://img.shields.io/npm/v/playwright-ui-mcp.svg)
+  ![downloads](https://img.shields.io/npm/dt/playwright-ui-mcp.svg)
+  ![license](https://img.shields.io/npm/l/playwright-ui-mcp.svg)                                                                
+  ![Node.js](https://img.shields.io/node/v/playwright-ui-mcp.svg)
   
   </div>
   
